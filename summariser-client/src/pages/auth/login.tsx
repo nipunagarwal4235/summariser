@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 export default function Login() {
   const navigate = useNavigate();
 
-  const { backendUrl, setIsLoggedIn } = useContext(AppContext);
+  const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContext);
 
   const [state, setState] = useState("Sign Up");
   const [name, setName] = useState("");
@@ -27,6 +27,7 @@ export default function Login() {
         });
         if (data.success) {
           setIsLoggedIn(true);
+          getUserData();
           navigate("/dashboard");
         } else {
           toast.error(data.message);
@@ -38,6 +39,7 @@ export default function Login() {
         });
         if (data.success) {
           setIsLoggedIn(true);
+          getUserData();
           navigate("/dashboard");
         } else {
           alert(data.message);

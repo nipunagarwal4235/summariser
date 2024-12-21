@@ -11,13 +11,16 @@ import {
 } from "@/components/ui/sheet";
 import { Upload } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import { useContext } from "react";
+import { AppContext } from "@/context/AppContext";
 
 export default function Header() {
+  const { userData } = useContext(AppContext);
   return (
     <main className="flex-grow flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8">
       <Card className="w-full max-w-[90vw] sm:max-w-[80vw] md:max-w-2xl lg:max-w-3xl p-4 sm:p-6 md:p-8">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8">
-          Summariser
+          {userData ? userData.name : "Anonymous"}'s Personal Summariser
         </h1>
         <div className="space-y-4">
           <Textarea
