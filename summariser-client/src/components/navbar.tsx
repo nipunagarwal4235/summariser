@@ -31,7 +31,7 @@ export default function Navbar() {
   const logout = async () => {
     try {
       axios.defaults.withCredentials = true;
-      const { data } = await axios.get(backendUrl + "/api/auth/logout");
+      const { data } = await axios.post(backendUrl + "/api/auth/logout");
       data.success && setIsLoggedIn(false);
       data.success && setUserData(null);
       navigate("/");
