@@ -1,5 +1,5 @@
 import express from "express";
-import { authenticateToken } from "../middleware/userAuth.js";
+import { userAuth } from "../middleware/userAuth.js";
 import {
   summarizeTextController,
   getSummariesController,
@@ -7,15 +7,7 @@ import {
 
 const summariseRouter = express.Router();
 
-summariseRouter.post(
-  "/summarise-text",
-
-  summarizeTextController
-);
-summariseRouter.get(
-  "/get-summaries",
-  authenticateToken,
-  getSummariesController
-);
+summariseRouter.post("/summarise-text", userAuth, summarizeTextController);
+summariseRouter.get("/get-summaries", userAuth, getSummariesController);
 
 export default summariseRouter;

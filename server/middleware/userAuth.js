@@ -19,8 +19,7 @@ export const userAuth = async (req, res, next) => {
 };
 
 export const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  const token = req.cookies;
 
   if (!token) {
     return res.status(401).json({ success: false, message: "Unauthorized" });

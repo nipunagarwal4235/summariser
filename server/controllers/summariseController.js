@@ -5,6 +5,7 @@ export const summarizeTextController = async (req, res) => {
   try {
     const { text } = req.body;
     const { userId } = req.body;
+
     if (!text) {
       return res.status(400).json({ error: "Text is required" });
     }
@@ -26,11 +27,10 @@ export const summarizeTextController = async (req, res) => {
 
 export const getSummariesController = async (req, res) => {
   try {
-    const summaries = await summaryModel
-      .find({ userId: req.user.id })
-      .sort({ createdAt: -1 })
-      .limit(20);
-    res.json(summaries);
+    const { userId } = req.body;
+    const summaries = await summaryModel.find({ userId });
+    console.log("summaries", summaries);
+    return res.json({ success: true, summaries });
   } catch (error) {
     console.error("Error fetching summaries:", error);
     res.status(500).json({ error: "Failed to fetch summaries" });
