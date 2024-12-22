@@ -4,6 +4,14 @@ import axios from "axios";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -45,15 +53,45 @@ export default function Navbar() {
       <div className="space-x-2">
         {userData ? (
           <div>
-            {userData.name[0].toUpperCase()}
-            <div>
-              <ul>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="h-9 w-9">
+                  <AvatarImage src="/placeholder-user.jpg" alt="@shadcn" />
+                  <AvatarFallback>
+                    {userData.name[0].toUpperCase()}
+                  </AvatarFallback>
+                  <span className="sr-only">Toggle user menu</span>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuItem className="font-bold text-lg">
+                  {userData.name}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
                 {!userData.isAccountVerified && (
-                  <li onClick={sendVerificationOtp}>Verify Email</li>
+                  <DropdownMenuItem asChild>
+                    <Button
+                      variant="outline"
+                      onClick={sendVerificationOtp}
+                      className="block w-full text-left"
+                    >
+                      Verify Email
+                    </Button>
+                  </DropdownMenuItem>
                 )}
-                <li onClick={logout}>Logout</li>
-              </ul>
-            </div>
+
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Button
+                    variant="outline"
+                    onClick={logout}
+                    className="block w-full text-left"
+                  >
+                    Logout
+                  </Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         ) : (
           <Button
