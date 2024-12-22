@@ -111,20 +111,21 @@ export const sendVerifyOtp = async (req, res) => {
       return res.json({ success: false, message: "Account already verified" });
     }
 
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    // const otp = String(Math.floor(100000 + Math.random() * 900000));
+    const otp = "888888"; // for testing purpose
 
     user.verifyOtp = otp;
     user.verifyOtpExpiresAt = Date.now() + 24 * 60 * 60 * 1000;
     await user.save();
+    // not sending email for now
+    // const mailOption = {
+    //   from: process.env.SENDER_EMAIL,
+    //   to: user.email,
+    //   subject: "Account Verification OTP",
+    //   text: `Your OTP for account verification is ${otp}`,
+    // };
 
-    const mailOption = {
-      from: process.env.SENDER_EMAIL,
-      to: user.email,
-      subject: "Account Verification OTP",
-      text: `Your OTP for account verification is ${otp}`,
-    };
-
-    await transporter.sendMail(mailOption);
+    // await transporter.sendMail(mailOption);
     res.json({ success: true, message: "OTP sent successfully" });
   } catch (error) {
     res.json({ success: false, message: error.message });
@@ -184,20 +185,21 @@ export const sendResetOtp = async (req, res) => {
       return res.json({ success: false, message: "User does not exist" });
     }
 
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    // const otp = String(Math.floor(100000 + Math.random() * 900000));
+    const otp = "888888"; // for testing purpose
 
     user.resetOtp = otp;
     user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
     await user.save();
 
-    const mailOption = {
-      from: process.env.SENDER_EMAIL,
-      to: user.email,
-      subject: "Password Reset OTP",
-      text: `Your OTP for password reset is ${otp}`,
-    };
+    // const mailOption = {
+    //   from: process.env.SENDER_EMAIL,
+    //   to: user.email,
+    //   subject: "Password Reset OTP",
+    //   text: `Your OTP for password reset is ${otp}`,
+    // };
 
-    await transporter.sendMail(mailOption);
+    // await transporter.sendMail(mailOption);
 
     res.json({
       success: true,

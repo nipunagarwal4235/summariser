@@ -98,26 +98,42 @@ export default function ResetPassword() {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmitEmail}>
-        <h1>Reset Password</h1>
-        <p>Enter your registered email to reset your password</p>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          required
-          placeholder="Email"
-        />
-        <button type="submit">Reset Password</button>
-      </form>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      {!isEmailSent && (
+        <form
+          onSubmit={onSubmitEmail}
+          className="bg-white p-8 rounded shadow-md w-full max-w-md"
+        >
+          <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
+          <p className="mb-4">
+            Enter your registered email to reset your password
+          </p>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            required
+            placeholder="Email"
+            className="w-full p-2 border border-gray-300 rounded mb-4"
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white p-2 rounded"
+          >
+            Reset Password
+          </button>
+        </form>
+      )}
 
       {/* Otp Input Form */}
       {!isOtpSubmitted && isEmailSent && (
-        <form onSubmit={onSubmitOtp}>
-          <h1>Reset Password OTP</h1>
-          <p>Enter the 6 digit code sent to your email</p>
-          <p>The otp is 888888</p>
+        <form
+          onSubmit={onSubmitOtp}
+          className="bg-white p-8 rounded shadow-md w-full max-w-md mt-8"
+        >
+          <h1 className="text-2xl font-bold mb-4">Reset Password OTP</h1>
+          <p className="mb-4">Enter the 6 digit code sent to your email</p>
+          <p className="mb-4">The otp is 888888</p>
           <div className="flex justify-between mb-8" onPaste={handlePaste}>
             {Array(6)
               .fill(0)
@@ -127,29 +143,40 @@ export default function ResetPassword() {
                   type="text"
                   maxLength={1}
                   required
-                  className="w-12 h-12 text-center border rounded"
+                  className="w-12 h-12 text-center border border-gray-300 rounded"
                   ref={(el) => (inputRefs.current[i] = el)}
                   onInput={(e) => handleInput(e, i)}
                   onKeyDown={(e) => handleKeyDown(e, i)}
                 />
               ))}
           </div>
-          <button>Submit</button>
+          <button className="w-full bg-blue-500 text-white p-2 rounded">
+            Submit
+          </button>
         </form>
       )}
       {/* Enter new password */}
       {isOtpSubmitted && isEmailSent && (
-        <form onSubmit={onSubmitNewPassword}>
-          <h1>New password</h1>
-          <p>Enter your new password</p>
+        <form
+          onSubmit={onSubmitNewPassword}
+          className="bg-white p-8 rounded shadow-md w-full max-w-md mt-8"
+        >
+          <h1 className="text-2xl font-bold mb-4">New Password</h1>
+          <p className="mb-4">Enter your new password</p>
           <input
             type="password"
             required
             placeholder="Password"
             onChange={(e) => setNewPassword(e.target.value)}
             value={newPassword}
+            className="w-full p-2 border border-gray-300 rounded mb-4"
           />
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white p-2 rounded"
+          >
+            Submit
+          </button>
         </form>
       )}
     </div>

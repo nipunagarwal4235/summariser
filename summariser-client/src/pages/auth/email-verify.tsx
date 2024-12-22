@@ -79,11 +79,18 @@ export default function EmailVerify() {
   }, [isLoggedIn, userData]);
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
-        <h1>Email Verify OTP</h1>
-        <p>Enter the 6 digit code sent to your email</p>
-        <p>The otp is 888888</p>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form
+        onSubmit={onSubmitHandler}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+      >
+        <h1 className="text-2xl font-semibold mb-4 text-center">
+          Email Verify OTP
+        </h1>
+        <p className="text-gray-600 mb-4 text-center">
+          Enter the 6 digit code sent to your email
+        </p>
+        <p className="text-gray-600 mb-4 text-center">The otp is 888888</p>
         <div className="flex justify-between mb-8" onPaste={handlePaste}>
           {Array(6)
             .fill(0)
@@ -93,14 +100,19 @@ export default function EmailVerify() {
                 type="text"
                 maxLength={1}
                 required
-                className="w-12 h-12 text-center border rounded"
+                className="w-12 h-12 text-center border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 ref={(el) => (inputRefs.current[i] = el)}
                 onInput={(e) => handleInput(e, i)}
                 onKeyDown={(e) => handleKeyDown(e, i)}
               />
             ))}
         </div>
-        <button>Verify Email</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200"
+        >
+          Verify Email
+        </button>
       </form>
     </div>
   );
