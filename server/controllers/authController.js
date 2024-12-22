@@ -33,14 +33,15 @@ export const register = async (req, res) => {
     });
 
     // sending welcome email
-    const mailOptions = {
-      from: process.env.SENDER_EMAIL,
-      to: email,
-      subject: "Welcome to Summariser",
-      text: `Hello and Welcome to Summariser. Your login credentials are as follows: Email: ${email}`,
-    };
+    // this is commented out because the email sending feature is not available
+    // const mailOptions = {
+    //   from: process.env.SENDER_EMAIL,
+    //   to: email,
+    //   subject: "Welcome to Summariser",
+    //   text: `Hello and Welcome to Summariser. Your login credentials are as follows: Email: ${email}`,
+    // };
 
-    await transporter.sendMail(mailOptions);
+    // await transporter.sendMail(mailOptions);
 
     return res.json({ success: true, message: "User registered successfully" });
   } catch (error) {

@@ -53,7 +53,7 @@ export default function Login() {
           getUserData();
           navigate("/summariser");
         } else {
-          alert(data.message);
+          toast.error(data.message);
         }
       }
     } catch (err: any) {
