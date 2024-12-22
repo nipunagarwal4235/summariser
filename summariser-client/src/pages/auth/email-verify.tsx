@@ -62,7 +62,7 @@ export default function EmailVerify() {
         toast.success(data.message);
 
         getUserData();
-        navigate("/dashboard");
+        navigate("/summariser");
       } else {
         toast.error(data.message);
       }
@@ -75,7 +75,7 @@ export default function EmailVerify() {
     isLoggedIn &&
       userData &&
       userData.isAccountVerified &&
-      navigate("/dashboard");
+      navigate("/summariser");
   }, [isLoggedIn, userData]);
 
   return (

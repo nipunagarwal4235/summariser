@@ -28,7 +28,7 @@ export default function Login() {
         if (data.success) {
           setIsLoggedIn(true);
           getUserData();
-          navigate("/dashboard");
+          navigate("/summariser");
         } else {
           toast.error(data.message);
         }
@@ -40,7 +40,7 @@ export default function Login() {
         if (data.success) {
           setIsLoggedIn(true);
           getUserData();
-          navigate("/dashboard");
+          navigate("/summariser");
         } else {
           alert(data.message);
         }

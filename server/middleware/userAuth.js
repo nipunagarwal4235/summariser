@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const userAuth = async (req, res, next) => {
+export const userAuth = async (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {
     return res.status(401).json({ success: false, message: "Unauthorized" });
@@ -18,4 +18,19 @@ const userAuth = async (req, res, next) => {
   }
 };
 
-export default userAuth;
+export const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
+    next();
+  } catch (error) {
+    return res.status(403).json({ success: false, message: error.message });
+  }
+};
