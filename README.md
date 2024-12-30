@@ -22,3 +22,7 @@ HUGGINGFACE_API_KEY = ''
 VITE_BACKEND_URL = 'http://localhost:5000'
 
 Step 5: Sign up and enjoy your summarization
+
+
+https://github.com/user-attachments/assets/505906fd-f05a-4538-a5e6-524004a1af7e
+
